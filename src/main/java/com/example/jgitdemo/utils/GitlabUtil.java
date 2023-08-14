@@ -2,6 +2,7 @@ package com.example.jgitdemo.utils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
@@ -40,11 +41,13 @@ public class GitlabUtil {
      * @throws Exception
      */
     public synchronized static void pushCommand(String user, String password, File file) throws Exception {
+        CredentialsProvider credentialsProvider
+                = new UsernamePasswordCredentialsProvider( "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", "" );
         if(file != null) {
             Git git = Git.open(new File(REP_ROOT_DIR ));
             git.add().addFilepattern(".").call();
             git.commit().setMessage( "后台自动上传备注" ).call();
-            Iterable<PushResult> list = git.push().setRemote("https://github.com/Believer24/JGit-demo.git").add("main").setCredentialsProvider(new UsernamePasswordCredentialsProvider(user,password)).call();
+            Iterable<PushResult> list = git.push().setRemote("https://github.com/Believer24/JGit-demo.git").add("main").setCredentialsProvider(credentialsProvider).call();
             if(list != null) {
                 for(PushResult pr : list) {
                     System.out.println(pr.getMessages());
