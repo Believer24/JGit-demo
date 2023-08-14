@@ -33,6 +33,16 @@
             <artifactId>org.eclipse.jgit</artifactId>
             <version>5.13.1.202206130422-r</version>
         </dependency>
+
+        <!-- ssh链接git的 -->
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit.ssh.jsch -->
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit.ssh.jsch</artifactId>
+            <version>5.13.1.202206130422-r</version>
+        </dependency>
+
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
