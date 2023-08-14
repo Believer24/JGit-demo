@@ -52,7 +52,7 @@ public class GitlabUtil {
 
             git.add().addFilepattern(".").call();
             git.commit().setMessage( "后台自动上传备注" ).call();
-            Iterable<PushResult> list = git.push().setRemote("https://github.com/Believer24/JGit-demo").add("main").setCredentialsProvider(new UsernamePasswordCredentialsProvider("Believer24", "Zh19930315")).call();
+            Iterable<PushResult> list = git.push().setRemote("https://github.com/Believer24/JGit-demo.git").add("main").setCredentialsProvider(new UsernamePasswordCredentialsProvider("Believer24", "Zh19930315")).call();
             if(list != null) {
                 for(PushResult pr : list) {
                     System.out.println(pr.getMessages());
