@@ -52,7 +52,7 @@ public class GitlabUtil {
             Status status = git.status().call();
             int add = status.getAdded().size();
             System.out.println("新增个文件:"+ add);
-            git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(user, password)).call();
+            git.push().setCredentialsProvider(credentialsProvider).call();
 
         }
     }
