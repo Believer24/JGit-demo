@@ -49,10 +49,10 @@ public class GitlabUtil {
             Git git = Git.open(new File(REP_ROOT_DIR ));
             git.add().addFilepattern(".").call();
             git.commit().setMessage( "后台自动上传备注" ).call();
-        git.push().setRemote("git@github.com:Believer24/JGit-demo.git").add("master").setCredentialsProvider(credentialsProvider).call();
             Status status = git.status().call();
             int add = status.getAdded().size();
             System.out.println("新增个文件:"+ add);
+            git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(user, password)).call();
 
         }
     }
