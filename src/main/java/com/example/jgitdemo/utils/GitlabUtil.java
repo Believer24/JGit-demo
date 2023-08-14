@@ -44,7 +44,7 @@ public class GitlabUtil {
      */
     public synchronized static void pushCommand(String user, String password, File file) throws Exception {
         CredentialsProvider credentialsProvider
-                = new UsernamePasswordCredentialsProvider( "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", "" );
+                = new UsernamePasswordCredentialsProvider("PRIVATE-TOKEN","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" );
         if(file != null) {
             Git git = Git.open(new File(REP_ROOT_DIR ));
             git.add().addFilepattern(".").call();
