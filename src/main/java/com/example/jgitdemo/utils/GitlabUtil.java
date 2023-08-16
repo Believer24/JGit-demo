@@ -10,7 +10,9 @@ import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class GitlabUtil {
     public static String REP_ROOT_DIR = "C:\\Work\\JGit-demo";
@@ -84,5 +86,12 @@ public class GitlabUtil {
                 .findGitDir() // scan up the file system tree
                 .setMustExist(true)
                 .build();
+    }
+
+    public static void createFileFromGitRoot(Repository repo, String filename, String content) throws FileNotFoundException {
+        File hello3 = new File(repo.getDirectory().getParent(), filename);
+        try (PrintWriter out = new PrintWriter(hello3)) {
+            System.out.println(content);
+        }
     }
 }

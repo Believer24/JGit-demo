@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @SpringBootTest
@@ -99,6 +100,22 @@ private static RepositoryProvider repoProvider = new RepositoryProviderExistingC
     void testJGit() throws Exception {
         try (Git git = new Git(repoProvider.get())) {
             git.pull().call();
+        }
+    }
+
+    @Test
+    void testAddCommitPush() throws Exception {
+        try (Repository repo = repoProvider.get();
+             Git git = new Git(repo)) {
+            GitlabUtil.createFileFromGitRoot(repo, "hello3.txt", "hello3");
+            git.add()
+                    .addFilepattern("hello3.txt")
+                    .call();
+            git.commit()
+                    .setMessage("hello3")
+                    .call();
+            git.push()
+                    .call();
         }
     }
 
