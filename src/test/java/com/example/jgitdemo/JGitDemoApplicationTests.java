@@ -126,7 +126,7 @@ private static  UsernamePasswordCredentialsProvider provider =
             git.add().addFilepattern(".").call();
             // 创建dev分支
 //            git.branchCreate().setName("dev").call();
-//            git.checkout().setName("dev").call();
+            git.checkout().setName("dev").call();
             git.commit().setMessage("dev test").call();
             git.push().setRemote("origin").add("dev").setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
         }
