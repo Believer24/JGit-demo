@@ -16,6 +16,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.junit.jupiter.api.Test;
@@ -127,8 +128,9 @@ private static  UsernamePasswordCredentialsProvider provider =
             // 创建dev分支
 //            git.branchCreate().setName("dev").call();
             git.checkout().setName("dev").call();
-            git.commit().setMessage("dev test").call();
-            git.push().setRemote("origin").add("dev").setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
+            git.commit().setMessage("this is real push test").call();
+            git.push().setRemote("origin").add("dev")
+                    .setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
         }
     }
 }
