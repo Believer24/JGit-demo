@@ -2,6 +2,7 @@ package com.example.jgitdemo.utils;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.Status;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -9,9 +10,10 @@ import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 import java.io.File;
+import java.io.IOException;
 
 public class GitlabUtil {
-    public static String REP_ROOT_DIR = "C:\\Work\\JGit-demo\\.git";
+    public static String REP_ROOT_DIR = "C:\\Work\\JGit-demo";
 
     /**
      * 根据配置获得最新的git代码
@@ -46,14 +48,41 @@ public class GitlabUtil {
         CredentialsProvider credentialsProvider
                 = new UsernamePasswordCredentialsProvider(user,"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" );
         if(file != null) {
-            Git git = Git.open(new File(REP_ROOT_DIR ));
-            git.add().addFilepattern(".").call();
-            git.commit().setMessage( "后台自动上传备注" ).call();
+            Git git = Git.open(file);
+            git.cloneRepository().setBranch("master")
+                    .setURI("https://github.com/Believer24/JGit-demo")
+                    .setDirectory(file)
+                    .call();
+            git.add().addFilepattern(file.getPath()).call();
+            git.commit().setMessage( "上传备注" ).call();
             Status status = git.status().call();
             int add = status.getAdded().size();
             System.out.println("新增个文件:"+ add);
-            git.push().setCredentialsProvider(credentialsProvider).call();
+            git.push().setRemote("origin").add("master").setCredentialsProvider(credentialsProvider).call();
 
         }
+    }
+
+
+    public static void commitFiles() throws IOException, GitAPIException {
+        String filePath = "";
+        Git git = Git.open( new File("C:\\Work\\JGit-demo\\.git") );
+        //创建用户文件的过程
+        File myfile = new File(filePath);
+        myfile.createNewFile();
+        git.add().addFilepattern("*").call();
+        //提交
+        git.commit().setMessage("test commit").call();
+        //推送到远程
+        git.push().call();
+    }
+
+    public static void creatLocalRepo(String path) throws IOException {
+        FileRepositoryBuilder repositoryBuilder = new FileRepositoryBuilder();
+        Repository repository = repositoryBuilder.setGitDir(new File(path))
+                .readEnvironment() // scan environment GIT_* variables
+                .findGitDir() // scan up the file system tree
+                .setMustExist(true)
+                .build();
     }
 }
