@@ -123,7 +123,7 @@ private static  UsernamePasswordCredentialsProvider provider =
             git.add().addFilepattern(".").call();
             // 创建dev分支
 //            git.branchCreate().setName("dev").call();
-            git.checkout().setName("dev").call();
+//            git.checkout().setName("dev").call();
             git.commit().setMessage("dev push  test").call();
             git.push().setRemote("origin").add("dev").setCredentialsProvider(provider).call();
         }
