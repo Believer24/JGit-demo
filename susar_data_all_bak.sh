@@ -1,0 +1,2 @@
+#!/bin/bash
+DATE=$(date +%Y%m%d);mysqldump -uroot -pHr@mysql1024 --databases susar_auto_mail > /home/sql_bak/susar_auto_mail_all_bak_${DATE}.sql;mysqldump -uroot -pHr@mysql1024 --databases xxl_job > /home/sql_bak/xxl_job_all_bak_${DATE}.sql
