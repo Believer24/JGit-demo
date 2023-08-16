@@ -127,7 +127,7 @@ private static  UsernamePasswordCredentialsProvider provider =
                     .setMessage("push test")
                     .call();
             git.push()
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("Believer24", "Zh19930315"))
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("Believer24", "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"))
                     .call();
         }
     }
