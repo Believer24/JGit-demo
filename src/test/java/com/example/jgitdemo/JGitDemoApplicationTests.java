@@ -128,7 +128,7 @@ private static  UsernamePasswordCredentialsProvider provider =
 //            git.branchCreate().setName("dev").call();
 //            git.checkout().setName("dev").call();
             git.commit().setMessage("dev test").call();
-            git.push().add("dev").setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
+            git.push().add("dev").setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
         }
     }
 }
