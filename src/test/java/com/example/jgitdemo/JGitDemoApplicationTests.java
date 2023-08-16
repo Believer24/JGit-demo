@@ -117,7 +117,8 @@ private static  UsernamePasswordCredentialsProvider provider =
             git.commit()
                     .setMessage("push test")
                     .call();
-            git.push().setCredentialsProvider(provider)
+            git.push()
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("Believer24", "Zh19930315"))
                     .call();
         }
     }
