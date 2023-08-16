@@ -26,7 +26,10 @@ class JGitDemoApplicationTests {
 
 
 //    private  RepositoryProvider repoProvider = new RepositoryProviderCloneImpl("C:\\Work\\JGit-demo\\.git", "C:\\Work\\demo");
-private static RepositoryProvider repoProvider = new RepositoryProviderExistingClientImpl("C:\\Work\\demo\\.git");
+private static RepositoryProvider repoProvider = new RepositoryProviderExistingClientImpl("C:\\Work\\JGit-demo\\.git");
+
+private static  UsernamePasswordCredentialsProvider provider =
+        new UsernamePasswordCredentialsProvider("Believer24", "Zh19930315");
 
     @Test
     void contextLoads() throws GitAPIException {
@@ -107,14 +110,14 @@ private static RepositoryProvider repoProvider = new RepositoryProviderExistingC
     void testAddCommitPush() throws Exception {
         try (Repository repo = repoProvider.get();
              Git git = new Git(repo)) {
-            GitlabUtil.createFileFromGitRoot(repo, "hello3.txt", "hello3");
+//            GitlabUtil.createFileFromGitRoot(repo, "hello3.txt", "hello3")
             git.add()
-                    .addFilepattern("hello3.txt")
+                    .addFilepattern(".")
                     .call();
             git.commit()
-                    .setMessage("hello3")
+                    .setMessage("push test")
                     .call();
-            git.push()
+            git.push().setCredentialsProvider(provider)
                     .call();
         }
     }
