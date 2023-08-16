@@ -125,7 +125,7 @@ private static  UsernamePasswordCredentialsProvider provider =
 //            git.branchCreate().setName("dev").call();
 //            git.checkout().setName("dev").call();
             git.commit().setMessage("dev push  test").call();
-            git.push().add("dev").setCredentialsProvider(provider).call();
+            git.push().setRemote("origin").add("dev").setCredentialsProvider(provider).call();
         }
     }
 
