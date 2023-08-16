@@ -34,7 +34,7 @@ class JGitDemoApplicationTests {
 private static RepositoryProvider repoProvider = new RepositoryProviderExistingClientImpl("C:\\Work\\JGit-demo\\.git");
 
 private static  UsernamePasswordCredentialsProvider provider =
-        new UsernamePasswordCredentialsProvider("Believer24", "Zh19930315");
+        new UsernamePasswordCredentialsProvider("Believer24", "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");
 
     @Test
     void contextLoads() throws GitAPIException {
