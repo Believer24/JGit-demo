@@ -16,7 +16,9 @@ public class RepositoryProviderCloneImpl implements RepositoryProvider {
     @Override
     public Repository get() throws Exception {
         File client = new File(clientPath);
-        client.mkdir();
+        if (!client.exists()) {
+            client.mkdir();
+        }
         try (Git result = Git.cloneRepository()
                 .setURI(repoPath)
                 .setDirectory(client)

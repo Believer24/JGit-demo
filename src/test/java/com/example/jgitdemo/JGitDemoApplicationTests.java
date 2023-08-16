@@ -10,9 +10,13 @@ import com.sas.iom.SAS.IWorkspace;
 import com.sas.iom.SAS.IWorkspaceHelper;
 import com.sas.services.connection.*;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ListBranchCommand;
+import org.eclipse.jgit.api.RemoteListCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.RemoteConfig;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 @SpringBootTest
 class JGitDemoApplicationTests {
@@ -101,16 +106,20 @@ private static  UsernamePasswordCredentialsProvider provider =
 
     @Test
     void testJGit() throws Exception {
-        try (Git git = new Git(repoProvider.get())) {
+//        RepositoryProvider tstProvider = new RepositoryProviderCloneImpl("https://github.com/Believer24/JGit-demo.git", "C:\\Work\\JGit");
+        RepositoryProvider trepoProvider = new RepositoryProviderExistingClientImpl("C:\\Work\\JGit\\.git");
+        try (Git git = new Git(trepoProvider.get())) {
+            git.checkout().setName("origin/master").call();
             git.pull().call();
         }
     }
 
+
+    //代码提交
     @Test
     void testAddCommitPush() throws Exception {
         try (Repository repo = repoProvider.get();
              Git git = new Git(repo)) {
-//            GitlabUtil.createFileFromGitRoot(repo, "hello3.txt", "hello3")
             git.add()
                     .addFilepattern(".")
                     .call();
