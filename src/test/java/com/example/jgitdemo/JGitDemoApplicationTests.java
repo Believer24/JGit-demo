@@ -127,7 +127,7 @@ private static  UsernamePasswordCredentialsProvider provider =
         try (Repository repo = repProvider.get();
              Git git = new Git(repo)) {
 //            StatusCommand status = git.status();
-//            git.checkout().setName("master").call();
+            git.checkout().setName("master").call();
             git.add().addFilepattern(".").call();
             // 创建dev分支
 //            git.branchCreate().setName("dev").call();
