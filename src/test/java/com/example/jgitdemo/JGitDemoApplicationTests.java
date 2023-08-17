@@ -130,7 +130,7 @@ private static  UsernamePasswordCredentialsProvider provider =
 //            git.branchCreate().setName("dev").call();
 //            git.checkout().setName("dev").call();
             git.commit().setMessage("this is local dev push to remote dev").call();
-            git.push().setRemote("origin").setRefSpecs(new RefSpec("dev:dev")).setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
+            git.push().setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
         }
     }
 }
