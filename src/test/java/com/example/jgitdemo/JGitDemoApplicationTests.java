@@ -12,6 +12,7 @@ import com.sas.services.connection.*;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand;
 import org.eclipse.jgit.api.RemoteListCommand;
+import org.eclipse.jgit.api.StatusCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -122,9 +123,11 @@ private static  UsernamePasswordCredentialsProvider provider =
     //代码提交
     @Test
     void testAddCommitPush() throws Exception {
-        try (Repository repo = repoProvider.get();
+        RepositoryProvider repProvider = new RepositoryProviderExistingClientImpl("C:\\Work\\JGit-demo\\.git");
+        try (Repository repo = repProvider.get();
              Git git = new Git(repo)) {
-            git.checkout().setName("dev").call();
+//            StatusCommand status = git.status();
+//            git.checkout().setName("master").call();
             git.add().addFilepattern(".").call();
             // 创建dev分支
 //            git.branchCreate().setName("dev").call();
