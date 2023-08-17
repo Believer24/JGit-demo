@@ -124,12 +124,13 @@ private static  UsernamePasswordCredentialsProvider provider =
     void testAddCommitPush() throws Exception {
         try (Repository repo = repoProvider.get();
              Git git = new Git(repo)) {
+            git.checkout().setName("dev").call();
             git.add().addFilepattern(".").call();
             // 创建dev分支
 //            git.branchCreate().setName("dev").call();
 //            git.checkout().setName("dev").call();
-            git.commit().setMessage("this is real push test").call();
-            git.push().add("origin/dev").setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
+            git.commit().setMessage("this is local dev push to remote dev").call();
+            git.push().setRemote("origin").setRefSpecs(new RefSpec("dev:dev")).setCredentialsProvider( new UsernamePasswordCredentialsProvider("Believer24", "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")).call();
         }
     }
 }
